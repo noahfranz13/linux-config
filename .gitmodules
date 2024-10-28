@@ -1,0 +1,3 @@
+[submodule ".emacs.d/nord-theme"]
+	path = .emacs.d/nord-theme
+	url = https://github.com/nordtheme/emacs.git
