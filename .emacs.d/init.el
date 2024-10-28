@@ -1,6 +1,11 @@
 ;; load the nord theme from the submodule
 (add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/nord-theme/"))
+
+(setq nord-region-highlight "snowstorm")
 (load-theme 'nord t)
+
+;; persistent line numbers
+(global-display-line-numbers-mode)
 
 ;; increase font size
 ;; cause I'm going blind
