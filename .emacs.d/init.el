@@ -1,33 +1,28 @@
-;; nano-emacs -- NOTES
-;; github: https://github.com/rougier/nano-emacs.git
-;; first run the ~/.emacs.d/fonts/install-fonts.sh script (for linux only)
-;; then add the following lines to add the nano packages
-(add-to-list 'load-path "~/.emacs.d/nano-emacs/")
-;; required for nano-emacs
-(require 'nano-faces)
-;; optional (can comment out to toggle on and off as you see fit)
-(require 'nano-layout) ;; default layout
-(require 'nano-defaults) ;; Nano session saving (optional)
-(require 'nano-session) ;; Nano session saving (optional)
-(require 'nano-modeline) ;; Nano header & mode lines (optional)
-;;(require 'nano-bindings) ;; Nano key bindings modification (optional)
-;;(require 'nano-compact) ;; the compact layout version of nano (must come after nano-modeline)
-;; optional themes (se
-(require 'nano-theme)
-(require 'nano-theme-dark)
-(require 'nano-theme-light)
-;; optional nano welcome message
-(let ((inhibit-message t))
-  (message "Welcome to GNU Emacs / N Λ N O edition")
-  (message (format "Initialization time: %s" (emacs-init-time))))
+;; load the nord theme from the submodule
+(add-to-list 'custom-theme-load-path (expand-file-name "~/.emacs.d/nord-theme/"))
+(load-theme 'nord t)
 
-;; set the theme
-(nano-theme-set-dark)
-(call-interactively 'nano-refresh-theme)
-;;(load-theme 'tsdh-dark t) ;; this is a more default theme but the nano one is kinda cool
+;; increase font size
+;; cause I'm going blind
+(defun fontify-frame (frame)
+  (set-frame-parameter frame 'font "RobotoMono-14"))
+
+;; Fontify current frame
+(fontify-frame nil)
+;; Fontify any future frames
+(push 'fontify-frame after-make-frame-functions) 
+
+;; turn off the toolbar because it's old and ugly
+;; plus no one who uses emacs ever really uses it...
+(tool-bar-mode -1)
+(menu-bar-mode -1) 
+
+;; disable the startup screen
+(setq inhibit-startup-screen t)
 
 ;; some other customizations
-(setq inhibit-startup-screen t)
+
+;; set the backup directory
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
 (add-hook 'prog-mode-hook (lambda () (display-fill-column-indicator-mode)))
 (setq-default fill-column 88) ;; add vertical line
@@ -41,11 +36,19 @@
 ;; (add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
-;; packages we want to require
-(require 'tramp) ;; for ssh connections
-(require 'auctex) ;; for latex
-(require 'ein) ;; emacs ipython notebooks
-(require 'pandoc) ;; for markdown support
+;; make sure some default packages are installed
+(dolist (package '(use-package))
+   (unless (package-installed-p package)
+       (package-install package)))
+
+(use-package tramp
+   :ensure t)
+(use-package auctex
+   :ensure t)
+(use-package ein
+   :ensure t)
+(use-package pandoc
+   :ensure t)
 
 ;; for LaTeX
 (setq TeX-auto-save t)
