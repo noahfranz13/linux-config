@@ -1,1 +1,1 @@
-/home/nfranz/linux-config/.emacs.d/
+linux-config/.emacs.d/
