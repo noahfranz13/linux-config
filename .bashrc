@@ -135,3 +135,7 @@ export BROWSER='/usr/bin/firefox'
 
 # set DISPLAY
 export DISPLAY=:0
+
+# set the default editor
+export EDITOR='program'
+export VISUAL='program'
