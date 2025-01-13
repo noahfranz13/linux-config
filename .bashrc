@@ -133,9 +133,9 @@ PS1="\[\e]\!|\u@\W\a\]${debian_chroot:+($debian_chroot)}\[\033[01;34m\]\!|\u@\[\
 # set browser
 export BROWSER='/usr/bin/firefox'
 
-# set DISPLAY
-export DISPLAY=:0
-
 # set the default editor
 export EDITOR='program'
 export VISUAL='program'
+
+# set DISPLAY
+#export DISPLAY=:0.0
