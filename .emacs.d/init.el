@@ -21,6 +21,7 @@
 
 ;; load the theme we want to use
 ;; and modify as necessary
+;; theme docs: https://protesilaos.com/emacs/modus-themes
 (require-theme 'modus-themes)
 
 (setq modus-vivendi-tritanopia-palette-overrides
