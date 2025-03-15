@@ -1,16 +1,13 @@
-;; load the theme we want to use
-;; and modify as necessary
-(require-theme 'modus-themes)
-
-(setq modus-vivendi-tritanopia-palette-overrides
-      '((bg-main "#333333")
-        ))
-
-(load-theme 'modus-vivendi-tritanopia :no-confirm)
-(enable-theme 'modus-vivendi-tritanopia)
-
 ;; persistent line numbers
 (global-display-line-numbers-mode)
+
+;; turn off the toolbar because it's old and ugly
+;; plus no one who uses emacs ever really uses it...
+(tool-bar-mode -1)
+(menu-bar-mode -1) 
+
+;; disable the startup screen
+(setq inhibit-startup-screen t)
 
 ;; increase font size
 ;; cause I'm going blind
@@ -22,13 +19,16 @@
 ;; Fontify any future frames
 (push 'fontify-frame after-make-frame-functions) 
 
-;; turn off the toolbar because it's old and ugly
-;; plus no one who uses emacs ever really uses it...
-(tool-bar-mode -1)
-(menu-bar-mode -1) 
+;; load the theme we want to use
+;; and modify as necessary
+(require-theme 'modus-themes)
 
-;; disable the startup screen
-(setq inhibit-startup-screen t)
+(setq modus-vivendi-tritanopia-palette-overrides
+      '((bg-main "#333333")
+        ))
+
+(load-theme 'modus-vivendi-tritanopia :no-confirm)
+(enable-theme 'modus-vivendi-tritanopia)
 
 ;; set the backup directory
 (setq backup-directory-alist '(("." . "~/.emacs.d/backups")))
@@ -69,9 +69,12 @@
  (add-hook 'python-mode-hook 'anaconda-mode))
 
 ;; for LaTeX
-(setq TeX-auto-save t)
-(setq TeX-parse-self t)
-(setq-default TeX-master nil)
+(use-package org
+  :config
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  (setq-default TeX-master nil)
+  )
 
 ;; for ein figures
 (setq ein:output-area-inlined-images t)
@@ -84,6 +87,9 @@
 
 ;; for tramp
 (setq tramp-default-method "ssh")
+
+;; for org mode
+(add-hook 'org-mode-hook 'variable-pitch-mode)
 
 ;; move the custom-set-variables to a different file and import it
 ;; to clean this file up
