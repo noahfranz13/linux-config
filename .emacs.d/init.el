@@ -55,6 +55,7 @@
 	ein
 	pandoc
 	markdown-mode
+	org-download
 	magit))
 
 ;; Iterate on packages and install missing ones
@@ -91,8 +92,12 @@
 
 ;; for org mode
 (add-hook 'org-mode-hook 'variable-pitch-mode)
+(require 'org-download)
 
 ;; move the custom-set-variables to a different file and import it
 ;; to clean this file up
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
+
+;; add files recursively for org-mode-agenda
+(setq org-agenda-files (directory-files-recursively "." "\\.org$"))
