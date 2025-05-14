@@ -100,4 +100,7 @@
 (load custom-file)
 
 ;; add files recursively for org-mode-agenda
-(setq org-agenda-files (directory-files-recursively "." "\\.org$"))
+(setq org-directory "~/research-log")
+(setq org-agenda-files (directory-files-recursively "~/research-log" "\\.org$"))
+(setq enable-local-eval t)
+(setq safe-local-eval-forms '((progn (org-agenda t) (split-window-below))))
