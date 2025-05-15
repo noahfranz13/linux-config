@@ -94,6 +94,11 @@
 (add-hook 'org-mode-hook 'variable-pitch-mode)
 (require 'org-download)
 
+;; Set custom org mode keybinds
+(with-eval-after-load 'org
+  (define-key org-mode-map (kbd "C-c a") 'org-agenda))
+
+
 ;; move the custom-set-variables to a different file and import it
 ;; to clean this file up
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
