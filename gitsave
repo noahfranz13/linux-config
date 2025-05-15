@@ -8,18 +8,29 @@ if [[ ! -d  "$(pwd)/.git" ]]; then
     exit 0
 fi
 
-# first display status and prompt to continue
+# then check if there is anything to even commit
+if [[ -z "$(git status -s)" ]]; then
+    echo "Nothing to commit! Exiting!"
+    exit 0
+fi
+
+# then display status and prompt to continue
 git status
 
 echo
-echo "Enter a commit message to continue, or type n to stop..."
-read -p "# " MSG
-if [[ "$MSG" == "n" ]]; then
-  echo "Exiting..."
-  exit 0
-else
-  echo "Okay, commiting and pushing!"
-fi
+echo "Enter a commit message to continue, status for git status, or type n to stop..."
+while true; do
+    read -p "# " MSG
+    if [[ "$MSG" == "n" ]]; then
+	echo "Exiting..."
+	exit 0
+    elif [[ "$MSG" == "status" ]]; then
+	git status
+    else
+	echo "Okay, commiting and pushing!"
+	break
+    fi
+done
 echo
 
 # then commit and push to the github
