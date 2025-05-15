@@ -1,9 +1,11 @@
 #!/bin/bash
+set -e
+
 
 # first check if this is a git repository
-if [[ ! $(git rev-parse --is-inside-work-tree) ]]; then
+if [[ ! -d  "$(pwd)/.git" ]]; then
     echo "ERROR: This is not a git repository!"
-    exit 1
+    exit 0
 fi
 
 # first display status and prompt to continue

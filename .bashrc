@@ -141,5 +141,5 @@ export VISUAL='program'
 #export DISPLAY=:0.0
 
 # set a gitsave command
-_TEMP_BASHFILEDIR=$(dirname "(realpath $0)")
-alias gitsave="$_TEMP_BASHFILEDIR/gitsave.sh"
+_TEMP_BASHFILEDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+export PATH="$_TEMP_BASHFILEDIR:$PATH"
