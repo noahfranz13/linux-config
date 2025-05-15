@@ -18,14 +18,20 @@ fi
 git status
 
 echo
-echo "Enter a commit message to continue, status for git status, or type n to stop..."
+echo "Enter a commit message to continue, status for git status, diff for git diff, or type n to stop..."
 while true; do
+    echo
     read -p "# " MSG
-    if [[ "$MSG" == "n" ]]; then
+    if [[ "$MSG" == "n" || "$MSG" == "exit" ]]; then
 	echo "Exiting..."
 	exit 0
-    elif [[ "$MSG" == "status" ]]; then
+    elif [[ "$MSG" == "status" || "$MSG" == "git status" ]]; then
 	git status
+    elif [[ "$MSG" == "diff" || "$MSG" == "git diff" ]]; then
+	git diff
+    elif [[ -z "$MSG" ]]; then
+	echo "Not doing anything due to empty commit message!"
+	exit 0
     else
 	echo "Okay, commiting and pushing!"
 	break
