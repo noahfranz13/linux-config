@@ -139,3 +139,7 @@ export VISUAL='program'
 
 # set DISPLAY
 #export DISPLAY=:0.0
+
+# set a gitsave command
+_TEMP_BASHFILEDIR=$(dirname "(realpath $0)")
+alias gitsave="$_TEMP_BASHFILEDIR/gitsave.sh"
