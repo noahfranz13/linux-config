@@ -14,6 +14,14 @@ if [[ -z "$(git status -s)" ]]; then
     exit 0
 fi
 
+# add everything
+echo $#
+if [[ $# -gt 0 ]]; then
+    git add $@
+else
+    git add .
+fi
+
 # then display status and prompt to continue
 git status
 
@@ -23,7 +31,8 @@ while true; do
     echo
     read -p "# " MSG
     if [[ "$MSG" == "n" || "$MSG" == "exit" ]]; then
-	echo "Exiting..."
+	echo "Unadding and exiting..."
+	git reset HEAD --
 	exit 0
     elif [[ "$MSG" == "status" || "$MSG" == "git status" ]]; then
 	git status
@@ -31,6 +40,8 @@ while true; do
 	git diff
     elif [[ -z "$MSG" ]]; then
 	echo "Not doing anything due to empty commit message!"
+	echo "Unadding and exiting..."
+	git reset HEAD --
 	exit 0
     else
 	echo "Okay, commiting and pushing!"
@@ -40,6 +51,5 @@ done
 echo
 
 # then commit and push to the github
-git add .
 git commit -m "$MSG"
 git push
